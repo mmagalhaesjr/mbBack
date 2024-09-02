@@ -1,6 +1,8 @@
+import Joi from 'joi';
+
 export const dadosSchema = Joi.object({
-    nome:Joi.string().required(),
-    telefone:Joi.number().required(),
-    email:Joi.string().email().required(),
-    cpf:Joi.string.number().required()
-})
+    name: Joi.string().required(),
+    phone: Joi.number().required(),
+    email: Joi.string().email().required(),
+    cpf: Joi.string().pattern(/^\d+$/).required()  // Validando que o CPF contém apenas números
+});
