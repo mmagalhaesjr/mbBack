@@ -7,7 +7,10 @@ async function fazerReserva(req, res) {
         await DadosServices.fazerReserva(dadosUsuario);
         return res.status(201).send('Dados enviados');
     } catch (error) {
-        console.error(error);
+
+        console.error(error.sqlState);
+        console.error(error.sqlMessage);
+
         return res.status(500).send('Erro no servidor controller');
     }
 }

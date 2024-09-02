@@ -16,8 +16,6 @@ server.use(express.json())
 server.use(rotaReservar)
 
 
-
-
 const PORTA = process.env.PORTA 
 
 server.listen(PORTA, () => {
