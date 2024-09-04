@@ -6,7 +6,7 @@ async function signup(req, res) {
 
     try {
         await AutenticarServices.signup(dadosUsuario);
-        return res.status(201).send('Usuário cadastrado com sucesso');
+        return res.status(201).send('logado');
     } catch (error) {
         if (error.message) {
             return res.status(409).send(error.message);
