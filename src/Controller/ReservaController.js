@@ -1,11 +1,10 @@
-import AutenticarServices from '../Services/AutenticarServices.js';
+import ReservaServices from '../Services/ReservaServices.js';
 
-async function signup(req, res) {
-    const dadosUsuario = req.body;
+async function criarReserva(req, res) {
+    const dadosReserva = req.body;
     
-
     try {
-        await AutenticarServices.signup(dadosUsuario);
+        await ReservaServices.criarReserva(dadosReserva);
         return res.status(201).send('logado');
     } catch (error) {
         if (error.message) {
@@ -18,6 +17,6 @@ async function signup(req, res) {
 }
 
 export default {
-    signup,
+    criarReserva,
 
 }
