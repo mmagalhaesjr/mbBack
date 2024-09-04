@@ -8,8 +8,8 @@ async function signup(req, res) {
         await AutenticarServices.signup(dadosUsuario);
         return res.status(201).send('Usuário cadastrado com sucesso');
     } catch (error) {
-        if (error.message === 'Usuário já cadastrado') {
-            return res.status(409).send('Usuário já cadastrado');
+        if (error.message) {
+            return res.status(409).send(error.message);
         }
 
         console.error('Erro no serviço:', error.message);
