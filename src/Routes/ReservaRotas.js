@@ -9,4 +9,5 @@ const reservaRotas = Router()
 reservaRotas.post("/reserva",validarDados(ReservaSchema), ReservaController.criarReserva)
 
 
+
 export default reservaRotas;
