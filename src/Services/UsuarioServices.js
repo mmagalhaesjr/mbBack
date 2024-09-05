@@ -1,12 +1,12 @@
 import UsuarioRepositories from '../Repositories/UsuarioRepositories.js';
 
 
-async function cadastrarUsuario(dadosBody) {
+async function cadastrarUsuario(dadosUsuario) {
     
-    const resultado =  await UsuarioRepositories.verificaCpf(dadosBody);
+    const resultado =  await UsuarioRepositories.verificaCpf(dadosUsuario);
 
     if (!resultado[0][0]) {
-        const newUser = await UsuarioRepositories.cadastrarUsuario({ cpf: dadosBody.dadosUsuario.cpf, name: dadosBody.dadosUsuario.name, phone: dadosBody.dadosUsuario.phone });
+        const newUser = await UsuarioRepositories.cadastrarUsuario({ cpf:dadosUsuario.cpf, name:dadosUsuario.name, phone:dadosUsuario.phone });
         return newUser[0].insertId
     }
 

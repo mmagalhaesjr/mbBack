@@ -2,9 +2,9 @@ import db from '../DataBase/db.js';
 
 
 
-async function CriarReservas({userId,idShendule}){
-    return await db.query(`INSERT INTO reservation (idUser, idShendule) 
-        VALUES (?, ?)`[userId,idShendule])
+async function CriarReservas({userId,idSchedule}){
+  
+    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,[userId,idSchedule])
 }
 
 async function visualizarReservas(){
