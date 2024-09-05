@@ -2,11 +2,12 @@ import ReservaRepositories from '../Repositories/ReservaRepositories.js';
 import UsuarioServices from './UsuarioServices.js';
 
 
-async function criarReserva({scheduleId, dadosBody}) {
+async function criarReserva({idShendule, dadosUsuario}) {
 
-    const userId = await UsuarioServices.cadastrarUsuario(dadosBody)
+    const userId = await UsuarioServices.cadastrarUsuario(dadosUsuario)
+ 
 
-    return await ReservaRepositories.CriarReservas({ idShendule, idUser})   
+    return await ReservaRepositories.CriarReservas({ idShendule, userId})   
 }
 
 export default {

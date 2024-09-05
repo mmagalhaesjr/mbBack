@@ -3,7 +3,7 @@ import db from '../DataBase/db.js';
 
 
 async function verificaCpf(dadosBody) {
-  return await db.query('SELECT * FROM user WHERE cpf = ?', [dadosBody.cpf]);
+  return await db.query('SELECT * FROM user WHERE cpf = ?', [dadosBody.dadosUsuario.cpf]);
 }
 
 
@@ -12,9 +12,9 @@ async function cadastrarUsuario(dadosBody) {
         `INSERT INTO user (cpf, name, phone) 
         VALUES (?, ?, ?)`,
         [
-            dadosBody.cpf,
-            dadosBody.name,
-            dadosBody.phone,
+            dadosBody.dadosUsuario.cpf,
+            dadosBody.dadosUsuario.name,
+            dadosBody.dadosUsuario.phone,
             
         ]
     );
