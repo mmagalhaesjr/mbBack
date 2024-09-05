@@ -6,7 +6,8 @@ import ReservaController from "../Controller/ReservaController.js";
 
 const reservaRotas = Router()
 
-reservaRotas.post("/reserva",validarDados(ReservaSchema), ReservaController.criarReserva)
+// reservaRotas.post("/reserva",validarDados(ReservaSchema), ReservaController.criarReserva)
+reservaRotas.post("/reserva", ReservaController.criarReserva)
 
 
 

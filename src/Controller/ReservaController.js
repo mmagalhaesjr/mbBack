@@ -1,10 +1,10 @@
 import ReservaServices from '../Services/ReservaServices.js';
 
 async function criarReserva(req, res) {
-    const dadosUsuario = req.body;
+    const dadosBody = req.body;
     
     try {
-        await ReservaServices.criarReserva(dadosUsuario);
+        await ReservaServices.criarReserva(dadosBody);
         return res.status(201).send('logado');
     } catch (error) {
         if (error.message) {
