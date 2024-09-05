@@ -2,12 +2,12 @@ import db from '../DataBase/db.js';
 
 
 
-async function CriarReservas(dadosUsuario){
+async function CriarReservas(dadosBody){
     return await db.query(`INSERT INTO reservation (idUser, idShendule) 
-        VALUES (?, ?)`[dadosUsuario.idUser, dadosUsuario.idShendule])
+        VALUES (?, ?)`[dadosBody.idUser, dadosBody.idShendule])
 }
 
-async function visualizarReservas(dadosUsuario,idCamarote){
+async function visualizarReservas(){
     return await db.query(` `)
 }
 
