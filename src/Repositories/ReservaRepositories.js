@@ -1,12 +1,12 @@
 import db from '../DataBase/db.js';
 
 async function verificaToken(token) {
-    return await db.query(`SELECT * FROM sessao WHERE token = ?`, [token]);
+    return await db.query(`SELECT * FROM section WHERE token = ?`, [token]);
 }
 
-async function CriarReservas(dadosBody){
+async function CriarReservas(dadosBody,tokenBd){
   
-    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,[dadosBody.idUser,dadosBody.idSchedule])
+    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,[dadosBody.idUser,tokenBd[0][0].idUser])
 }
 
 async function visualizarReservas(){
