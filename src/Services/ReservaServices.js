@@ -1,11 +1,19 @@
 import ReservaRepositories from '../Repositories/ReservaRepositories.js';
 
 
-async function criarReserva(dadosBody) {
+async function criarReserva(dadosBody,authorization) {
+
+    const token = authorization.replace("Bearer ", ""); // tem que ter um espaço após o Bearer
+
+        const tokenBd = await ReservaRepositories.verificaToken(token);
+        
+        if (tokenBd[0][0].length === 0) {
+            throw new Error('Token inválido');
+        }
     
-   const res =  await ReservaRepositories.CriarReservas(dadosBody) 
-   console.log(res)
-   return res
+        return await ReservaRepositories.CriarReservas(dadosBody,tokenBd) 
+
+  
 
 }
 

@@ -20,6 +20,18 @@ async function verificaPhone(dadosBody) {
       ]
     );
   }
+
+  async function verificaSessao(token, idUsuario) {
+    const result = await db.query(`SELECT * FROM section WHERE  = ?`, [token, idUsuario]);
+    return result.rows.length > 0;
+}
+
+  async function inserirTokenSecao(token, idUsuario) {
+    await db.query(`INSERT INTO section (iduser, token) VALUES (?,?)`, [token, idUsuario]);
+}
+async function removerTokensAntigos(token, idUsuario) {
+    await db.query('DELETE FROM section WHERE iduser = ?', [token, idUsuario]);
+}
   
 
 
@@ -36,5 +48,8 @@ async function verificaPhone(dadosBody) {
 export default {
     verificaCpf,
     verificaPhone,
-    cadastrarUsuario,  
+    cadastrarUsuario,
+    inserirTokenSecao,
+    removerTokensAntigos ,
+    verificaSessao
 }

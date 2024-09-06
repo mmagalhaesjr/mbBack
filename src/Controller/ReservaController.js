@@ -2,10 +2,11 @@ import ReservaServices from '../Services/ReservaServices.js';
 
 async function criarReserva(req, res) {
     const dadosBody = req.body;
+    const { authorization } = req.headers;
 
     
     try {
-        await ReservaServices.criarReserva(dadosBody);
+        await ReservaServices.criarReserva(dadosBody,authorization);
         return res.status(201).send('reserva criada');
         
     } catch (error) {
