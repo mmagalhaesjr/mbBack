@@ -27,14 +27,14 @@ async function cadastrarUsuario(dadosBody) {
 
 
 async function login(cpfBody) {
-    const verificaCpf = await AutenticarRepositories.verificaCpf(cpfBody)
+    const verificaDados = await AutenticarRepositories.verificaDados(cpfBody)
 
-   
+   console.log(verificaDados[0][0])
 
-    if(!verificaCpf[0][0]){
+    if(!verificaDados[0][0]){
         throw new Error('CPF não cadasstrado, porfavor insira nome e telefone!');
     }
-    const idUsuario = verificaCpf[0][0].id
+    const idUsuario = verificaDados[0][0].id
     const token = uuidv4();
 
     

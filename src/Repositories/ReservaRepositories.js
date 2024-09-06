@@ -6,7 +6,11 @@ async function verificaToken(token) {
 
 async function CriarReservas(dadosBody,tokenBd){
   
-    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,[dadosBody.idUser,tokenBd[0][0].idUser])
+    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,
+        [ 
+        tokenBd[0][0].idUser,
+        dadosBody.idSchedule
+    ])
 }
 
 async function visualizarReservas(){

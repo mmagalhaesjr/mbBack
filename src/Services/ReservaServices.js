@@ -13,8 +13,6 @@ async function criarReserva(dadosBody,authorization) {
     
         return await ReservaRepositories.CriarReservas(dadosBody,tokenBd) 
 
-  
-
 }
 
 async function visualizarReservas() {

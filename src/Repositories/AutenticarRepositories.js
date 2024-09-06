@@ -1,7 +1,7 @@
 import db from '../DataBase/db.js';
 
 
-async function verificaCpf(dadosBody) {
+async function verificaDados(dadosBody) {
     return await db.query('SELECT * FROM user WHERE cpf = ?  ', [dadosBody.cpf]);
   }
 
@@ -21,17 +21,17 @@ async function verificaPhone(dadosBody) {
     );
   }
 
-  async function verificaSessao(token, idUsuario) {
-    const result = await db.query(`SELECT * FROM section WHERE  = ?`, [token, idUsuario]);
+  async function verificaSessao(idUsuario) {
+    const result = await db.query(`SELECT * FROM section WHERE  = ?`, [idUsuario]);
     return result.rows.length > 0;
-}
+  }
 
   async function inserirTokenSecao(token, idUsuario) {
-    await db.query(`INSERT INTO section (iduser, token) VALUES (?,?)`, [token, idUsuario]);
-}
-async function removerTokensAntigos(token, idUsuario) {
-    await db.query('DELETE FROM section WHERE iduser = ?', [token, idUsuario]);
-}
+    await db.query(`INSERT INTO section (token, idUser) VALUES (?,?)`, [token, idUsuario]);
+  }
+  async function removerTokensAntigos(idUsuario) {
+    await db.query('DELETE FROM section WHERE idUser = ?', [idUsuario]);
+  }
   
 
 
@@ -46,7 +46,7 @@ async function removerTokensAntigos(token, idUsuario) {
 
 
 export default {
-    verificaCpf,
+  verificaDados,
     verificaPhone,
     cadastrarUsuario,
     inserirTokenSecao,
