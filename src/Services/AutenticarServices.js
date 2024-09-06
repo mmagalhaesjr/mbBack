@@ -34,13 +34,6 @@ async function login(cpfBody) {
     await AutenticarRepositories.cadastrarUsuario(dadosBody);
 }
 
-
-
-
-
-
-
-
 export default {
     cadastrarUsuario,
     login

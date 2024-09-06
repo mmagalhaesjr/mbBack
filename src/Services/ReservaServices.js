@@ -1,9 +1,11 @@
 import ReservaRepositories from '../Repositories/ReservaRepositories.js';
 
 
-async function criarReserva() {
-
-   return await ReservaRepositories.CriarReservas() 
+async function criarReserva(dadosBody) {
+    
+   const res =  await ReservaRepositories.CriarReservas(dadosBody) 
+   console.log(res)
+   return res
 
 }
 
