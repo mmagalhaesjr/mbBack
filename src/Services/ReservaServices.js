@@ -1,14 +1,17 @@
 import ReservaRepositories from '../Repositories/ReservaRepositories.js';
-import UsuarioServices from './UsuarioServices.js';
 
 
-async function criarReserva({idSchedule, dadosUsuario}) {
+async function criarReserva() {
 
-    const userId = await UsuarioServices.cadastrarUsuario(dadosUsuario)
- 
-    return await ReservaRepositories.CriarReservas({ idSchedule, userId})   
+   return await ReservaRepositories.CriarReservas() 
+
+}
+
+async function visualizarReservas() {
+    // receber o id do usuario e passar para o repositories para ela trazer as reservas onde o idUser seja o mesmo que eu estou passando aq
 }
 
 export default {
     criarReserva,
+    visualizarReservas
 }

@@ -16,6 +16,23 @@ async function criarReserva(req, res) {
     }
 }
 
+async function visualizarReservas(req, res) {
+    
+    const { id } = req.params;
+
+    try {
+        const minhasReservas = await ReservaServicesServices.visualizarReservas(id);
+        return res.status(200).send(minhasReservas);
+
+    } catch (error) {
+            
+                return res.status(401).send(error.message);
+        }
+    }
+
+
 export default {
     criarReserva,
+    visualizarReservas
 }
+

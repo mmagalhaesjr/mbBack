@@ -8,7 +8,7 @@ async function CriarReservas({userId,idSchedule}){
 }
 
 async function visualizarReservas(){
-    return await db.query(` `)
+    return await db.query('SELECT * FROM reservation WHERE cpf = ?', [cpf])
 }
 
 async function deletarReservas(){

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import reservaRotas from "./Routes/ReservaRotas.js";
+import autenticarRotas from './Routes/AutenticarRotas.js';
 
 
 
@@ -13,7 +14,7 @@ dotenv.config()
 const server = express().use(cors());
 server.use(express.json())
 
-
+server.use(autenticarRotas)
 server.use(reservaRotas)
 
 
