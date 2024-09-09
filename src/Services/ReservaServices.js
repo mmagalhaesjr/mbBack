@@ -1,25 +1,47 @@
 import ReservaRepositories from '../Repositories/ReservaRepositories.js';
+import ScheduleRepositories from '../Repositories/ScheduleRepositories.js';
+import UsuarioRepositories from '../Repositories/UsuarioRepositories.js';
+import UsuarioServices from './UsuarioServices.js';
 
 
-async function criarReserva(dadosBody,authorization) {
+async function createReservation({ scheduleId, dadosUsuario }) {
 
-    const token = authorization.replace("Bearer ", ""); // tem que ter um espaço após o Bearer
+    const idUser = await UsuarioServices.cadastrarUsuario(dadosUsuario)
 
-        const tokenBd = await ReservaRepositories.verificaToken(token);
+    const schedule = await ScheduleRepositories.getScheduleById(scheduleId)
+  
+    if (!schedule[0][0] || !schedule[0][0].available) throw Error("Não foi possível realizar a reserva")
+ 
+    const reserva = await ReservaRepositories.createReservation({ scheduleId, idUser })
         
-        if (tokenBd[0][0].length === 0) {
-            throw new Error('Token inválido');
-        }
-    
-        return await ReservaRepositories.CriarReservas(dadosBody,tokenBd) 
+   return await ScheduleRepositories.updateSchedule(scheduleId, 0)
 
 }
 
-async function visualizarReservas() {
-    // receber o id do usuario e passar para o repositories para ela trazer as reservas onde o idUser seja o mesmo que eu estou passando aq
+async function getReservationsByUserId(cpf) {
+    const user = await UsuarioRepositories.getUserByCpf(cpf)
+    console.log(user[0][0])
+    if(!user[0][0]) throw Error("Você não possui agendamentos")
+         
+
+    const reservations = await ReservaRepositories.getReservationsByUserId(user[0][0].id);
+console.log(reservations)
+    if (reservations[0].length === 0) throw Error("Você não possui reservas")
+
+    return reservations[0]
+}
+
+async function deleteReservation(reservationId) {
+    const reservation = await ReservaRepositories.getReservationById(reservationId)
+
+    if (!reservation[0][0]) throw new Error("Reserva não encontrada")
+
+    await ReservaRepositories.deleteReservation(reservationId)
+    await ScheduleRepositories.updateSchedule(reservation[0][0].scheduleId, 1)
 }
 
 export default {
-    criarReserva,
-    visualizarReservas
+    createReservation,
+    getReservationsByUserId,
+    deleteReservation
 }

@@ -1,31 +1,30 @@
 import db from '../DataBase/db.js';
 
-async function verificaToken(token) {
-    return await db.query(`SELECT * FROM section WHERE token = ?`, [token]);
-}
+async function createReservation({ scheduleId, idUser }) {
 
-async function CriarReservas(dadosBody,tokenBd){
-  
     return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,
-        [ 
-        tokenBd[0][0].idUser,
-        dadosBody.idSchedule
-    ])
+        [idUser, scheduleId])
 }
 
-async function visualizarReservas(){
-    return await db.query('SELECT * FROM reservation WHERE cpf = ?', [cpf])
+async function getReservationsByUserId(idUser) {
+    return await db.query('SELECT * FROM reservation WHERE idUser = ?', [idUser])
 }
 
-async function deletarReservas(){
-    return await db.query(` `)
+async function getReservationById(reservationId) {
+
+    return await db.query('SELECT * FROM reservation WHERE id = ?', [reservationId])
+}
+
+async function deleteReservation(reservationId) {
+    return await db.query('DELETE FROM reservation WHERE id = ?',
+        [reservationId])
 }
 
 
 
 export default {
-    CriarReservas,
-    visualizarReservas,
-    deletarReservas,
-    verificaToken
+    createReservation,
+    getReservationsByUserId,
+    getReservationById,
+    deleteReservation
 };
