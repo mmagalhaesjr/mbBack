@@ -41,9 +41,9 @@ async function login(cpfBody) {
     // remove o token antigo
        await AutenticarRepositories.removerTokensAntigos(idUsuario);
         // Insere o token na sessão
-       await AutenticarRepositories.inserirTokenSecao(idUsuario, token);
+       await AutenticarRepositories.inserirTokenSecao(token, idUsuario);
    
-       return {token, idUsuario};
+       return {token,idUsuario};
 
 }
 

@@ -22,7 +22,7 @@ async function verificaPhone(dadosBody) {
   }
 
   async function verificaSessao(idUsuario) {
-    const result = await db.query(`SELECT * FROM section WHERE  = ?`, [idUsuario]);
+    const result = await db.query(`SELECT * FROM section WHERE idUser = ?`, [idUsuario]);
     return result.rows.length > 0;
   }
 
