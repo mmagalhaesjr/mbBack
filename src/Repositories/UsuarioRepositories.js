@@ -17,7 +17,7 @@ async function signUpUser(dadosBody) {
   );
 }
 
-asy
+
 export default {
   getUserByCpf,
   signUpUser
