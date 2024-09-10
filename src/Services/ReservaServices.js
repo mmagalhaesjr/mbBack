@@ -20,12 +20,12 @@ async function createReservation({ scheduleId, dadosUsuario }) {
 
 async function getReservationsByUserId(cpf) {
     const user = await UsuarioRepositories.getUserByCpf(cpf)
-    console.log(user[0][0])
+
     if(!user[0][0]) throw Error("Você não possui agendamentos")
          
 
     const reservations = await ReservaRepositories.getReservationsByUserId(user[0][0].id);
-console.log(reservations)
+
     if (reservations[0].length === 0) throw Error("Você não possui reservas")
 
     return reservations[0]

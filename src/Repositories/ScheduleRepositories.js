@@ -1,7 +1,7 @@
 import db from '../DataBase/db.js';
 
 async function getScheduleByCabinId({ cabinId, date }) {
-  console.log(cabinId, date)
+
   const startDate = new Date(date)
   const endDate = new Date(date)
   endDate.setDate(startDate.getDate() + 1);
