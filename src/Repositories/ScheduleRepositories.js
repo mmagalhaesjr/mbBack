@@ -17,9 +17,9 @@ async function getScheduleById(scheduleId) {
 }
 
 async function updateSchedule(scheduleId, available) {
-  return await db.query('UPDATE schedule SET available = ? WHERE id = ?',
-    [available, scheduleId]);
+  return db.query('UPDATE schedule SET available = ? WHERE id = ?', [available, scheduleId]);
 }
+
 
 
 export default {

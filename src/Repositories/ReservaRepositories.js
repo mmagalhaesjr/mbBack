@@ -7,7 +7,20 @@ async function createReservation({ scheduleId, idUser }) {
 }
 
 async function getReservationsByUserId(idUser) {
-    return await db.query('SELECT * FROM reservation WHERE idUser = ?', [idUser])
+    return await db.query(
+        `SELECT 
+            r.*, 
+            u.name AS userName, 
+            c.name AS cabinName,
+            c.value AS cabinValue,
+            s.date AS reservationDate ,
+            s.time AS reservationTime
+        FROM reservation r
+        JOIN user u ON r.idUser = u.id
+        JOIN schedule s ON r.idSchedule = s.id
+        JOIN cabin c ON s.idCabin = c.id
+        WHERE r.idUser = ?`, [idUser]
+    )
 }
 
 async function getReservationById(reservationId) {

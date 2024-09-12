@@ -6,15 +6,17 @@ import UsuarioServices from './UsuarioServices.js';
 
 async function createReservation({ scheduleId, dadosUsuario }) {
 
-    const idUser = await UsuarioServices.cadastrarUsuario(dadosUsuario)
+    const idUser = await UsuarioServices.signUpUser(dadosUsuario)
 
     const schedule = await ScheduleRepositories.getScheduleById(scheduleId)
   
     if (!schedule[0][0] || !schedule[0][0].available) throw Error("Não foi possível realizar a reserva")
  
-    const reserva = await ReservaRepositories.createReservation({ scheduleId, idUser })
-        
-   return await ScheduleRepositories.updateSchedule(scheduleId, 0)
+   await ReservaRepositories.createReservation({ scheduleId, idUser })
+
+   await ScheduleRepositories.updateSchedule(scheduleId, false)
+
+   return
 
 }
 
