@@ -1,10 +1,20 @@
 import db from '../DataBase/db.js';
 
-async function createReservation({ scheduleId, idUser }) {
+async function createReservation({ idUser, cabinId, date, time }) {
 
-    return await db.query(`INSERT INTO reservation (idUser, idSchedule) VALUES (?, ?)`,
-        [idUser, scheduleId])
+    return await db.query(`INSERT INTO reservation (idUser, cabinId, date, time,) VALUES (?, ?, ?, ?)`,
+        [idUser, cabinId, date, time])
 }
+
+async function getReservationsByCabinId({ cabinId, date }) {
+
+    const startDate = new Date(date)
+    const endDate = new Date(date)
+    endDate.setDate(startDate.getDate() + 1);
+  
+    return await db.query('SELECT * FROM reservation WHERE idCabin = ? AND date >= ? AND date < ?',
+      [cabinId, startDate, endDate]);
+  }
 
 async function getReservationsByUserId(idUser) {
     return await db.query(
@@ -37,6 +47,7 @@ async function deleteReservation(reservationId) {
 
 export default {
     createReservation,
+    getReservationsByCabinId,
     getReservationsByUserId,
     getReservationById,
     deleteReservation

@@ -1,14 +1,6 @@
 import db from '../DataBase/db.js';
 
-async function getScheduleByCabinId({ cabinId, date }) {
 
-  const startDate = new Date(date)
-  const endDate = new Date(date)
-  endDate.setDate(startDate.getDate() + 1);
-
-  return await db.query('SELECT * FROM schedule WHERE idCabin = ? AND date >= ? AND date < ?',
-    [cabinId, startDate, endDate]);
-}
 
 async function getScheduleById(scheduleId) {
 
@@ -23,7 +15,6 @@ async function updateSchedule(scheduleId, available) {
 
 
 export default {
-  getScheduleByCabinId,
   getScheduleById,
   updateSchedule
 }

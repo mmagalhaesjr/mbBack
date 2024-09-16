@@ -1,11 +1,11 @@
 import ReservaServices from '../Services/ReservaServices.js';
 
 async function createReservation(req, res) {
-    const {scheduleId, dadosUsuario} = req.body;
+    const {cabinId, date, time, dadosUsuario} = req.body;
 
 
     try {
-        await ReservaServices.createReservation({scheduleId, dadosUsuario});
+        await ReservaServices.createReservation({cabinId, date, time, dadosUsuario});
         return res.status(201).send('Reserva criada com sucesso');
 
     } catch (error) {
@@ -15,6 +15,20 @@ async function createReservation(req, res) {
     }
 }
 
+
+async function getReservationsByCabinId(req, res) {
+
+    const { cabinId, date } = req.params;
+
+    try {
+        const reservas = await ReservaServices.getReservationsByCabinId({cabinId, date});
+        return res.status(200).send(reservas);
+
+    } catch (error) {
+
+        return res.status(401).send(error.message);
+    }
+}
 
 async function getReservationsByUserId(req, res) {
 
@@ -46,6 +60,7 @@ async function deleteReservation(req, res) {
 export default {
     createReservation,
     getReservationsByUserId,
-    deleteReservation
+    deleteReservation,
+    getReservationsByCabinId
 }
 

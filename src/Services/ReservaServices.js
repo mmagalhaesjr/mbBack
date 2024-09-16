@@ -4,20 +4,20 @@ import UsuarioRepositories from '../Repositories/UsuarioRepositories.js';
 import UsuarioServices from './UsuarioServices.js';
 
 
-async function createReservation({ scheduleId, dadosUsuario }) {
+async function createReservation({ cabinId, date, time, dadosUsuario }) {
 
     const idUser = await UsuarioServices.signUpUser(dadosUsuario)
-
-    const schedule = await ScheduleRepositories.getScheduleById(scheduleId)
-  
-    if (!schedule[0][0] || !schedule[0][0].available) throw Error("Não foi possível realizar a reserva")
  
-   await ReservaRepositories.createReservation({ scheduleId, idUser })
+    return await ReservaRepositories.createReservation({ cabinId, date, time, idUser })
 
-   await ScheduleRepositories.updateSchedule(scheduleId, false)
+}
 
-   return
+async function getReservationsByCabinId({cabinId, date}) {
 
+    const reservas = await ReservaRepositories.getReservationsByCabinId({cabinId, date})
+
+         
+        return reservas[0]
 }
 
 async function getReservationsByUserId(cpf) {
@@ -44,6 +44,7 @@ async function deleteReservation(reservationId) {
 
 export default {
     createReservation,
+    getReservationsByCabinId,
     getReservationsByUserId,
     deleteReservation
 }

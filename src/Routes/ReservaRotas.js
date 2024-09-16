@@ -8,6 +8,7 @@ const reservaRotas = Router()
 
 reservaRotas.post("/reserva", validarDados(reservaSchema), ReservaController.createReservation)
 reservaRotas.get('/reservas/:userCPF', ReservaController.getReservationsByUserId)
+reservaRotas.get("/reservas/:cabinId/:date", ReservaController.getReservationsByCabinId)
 reservaRotas.delete('/reserva/:id', ReservaController.deleteReservation)
 
 

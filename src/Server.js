@@ -2,7 +2,6 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import reservaRotas from "./Routes/ReservaRotas.js";
-import scheduleRotas from "./Routes/ScheduleRotas.js";
 
 
 
@@ -15,7 +14,6 @@ const server = express().use(cors());
 server.use(express.json())
 
 server.use(reservaRotas)
-server.use(scheduleRotas)
 
 
 const PORTA = process.env.PORTA 
