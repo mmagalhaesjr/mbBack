@@ -2,8 +2,8 @@ import db from '../DataBase/db.js';
 
 async function createReservation({ idUser, cabinId, date, time }) {
 
-    return await db.query(`INSERT INTO reservation (idUser, cabinId, date, time,) VALUES (?, ?, ?, ?)`,
-        [idUser, cabinId, date, time])
+    return await db.query('INSERT INTO reservation (idUser, idCabin, date, time) VALUES (?, ?, ?, ?)',
+    [idUser, cabinId, date, time])
 }
 
 async function getReservationsByCabinId({ cabinId, date }) {
